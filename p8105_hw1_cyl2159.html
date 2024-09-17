@@ -1518,9 +1518,9 @@ factor vector with 3 levels:</p>
 )</code></pre>
 <p>Trying to calculate and outputting mean for each variable:</p>
 <pre class="r"><code>mean(pull(example_df, sample_var))</code></pre>
-<pre><code>## [1] 0.5785836</code></pre>
+<pre><code>## [1] -0.06315212</code></pre>
 <pre class="r"><code>mean(pull(example_df, log_var))</code></pre>
-<pre><code>## [1] 0.7</code></pre>
+<pre><code>## [1] 0.5</code></pre>
 <pre class="r"><code>mean(pull(example_df, char_var))</code></pre>
 <pre><code>## Warning in mean.default(pull(example_df, char_var)): argument is not numeric or
 ## logical: returning NA</code></pre>
@@ -1530,7 +1530,10 @@ factor vector with 3 levels:</p>
 ## or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>Here, we are able to calculate mean for <code>sample_var</code> and
-<code>log_var</code>, but cannot do so for <code>char_var</code> and
+<code>log_var</code>. In terms of the logical vector
+<code>log_var</code> it considers <code>FALSE</code> and
+<code>TRUE</code> as 0 and 1 respctively to calculate the mean. We get a
+NA value and warning for <code>char_var</code> and
 <code>factor_var</code> as they are not numeric or binary variables.</p>
 <p>If we coerce them to be a numeric value as shown below:</p>
 <pre class="r"><code>mean(pull(example_df, as.numeric(sample_var)))
@@ -1538,8 +1541,8 @@ mean(pull(example_df, as.numeric(log_var)))
 mean(pull(example_df, as.numeric(char_var)))
 mean(pull(example_df, as.numeric(factor_var)))</code></pre>
 <p>This will also calculate the mean for <code>char_var</code> and
-<code>factor_var</code> as NA. However, because we are forcing variable
-to be numeric and the inherently character values in these two variables
+<code>factor_var</code> as NA. Because we are forcing variable to be
+numeric and the inherently character values in these two variables
 cannot be converted to a numeric type, they will all be considered
 missing values (NAs). As a result, the mean for these variable with be
 NA, and we will get a warning message.</p>

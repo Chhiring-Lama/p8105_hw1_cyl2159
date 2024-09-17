@@ -53,7 +53,7 @@ mean(pull(example_df, char_var))
 mean(pull(example_df, factor_var))
 ```
 
-Here, we are able to calculate mean for `sample_var` and `log_var`, but cannot do so for `char_var` and `factor_var` as they are not numeric or binary variables. 
+Here, we are able to calculate mean for `sample_var` and `log_var`. In terms of the logical vector `log_var`, it considers `FALSE` and `TRUE` as 0 and 1 respectively to calculate the mean. We get a NA value and warning for `char_var` and `factor_var` as they are not numeric or binary variables. 
 
 If we coerce them to be a numeric value as shown below:
 ```{r mean_calc_after_coercing, eval = FALSE}
@@ -63,7 +63,7 @@ mean(pull(example_df, as.numeric(char_var)))
 mean(pull(example_df, as.numeric(factor_var)))
 ```
 
-This will also calculate the mean for `char_var` and `factor_var` as NA. However, because we are forcing variable to be numeric and the inherently character values in these two variables cannot be converted to a numeric type, they will all be considered missing values (NAs). As a result, the mean for these variable with be NA, and we will get a warning message. 
+This will also calculate the mean for `char_var` and `factor_var` as NA. Because we are forcing variable to be numeric and the inherently character values in these two variables cannot be converted to a numeric type, they will all be considered missing values (NAs). As a result, the mean for these variable with be NA, and we will get a warning message. 
 
 
 
