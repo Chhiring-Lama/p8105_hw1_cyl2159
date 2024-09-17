@@ -1,0 +1,34 @@
+---
+title: "p8105_hw1_cyl2159"
+author: "Chhiring Lama"
+date: "2024-09-17"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+## *Problem 1*
+
+Importing penguin dataset:
+```{r import_data, message=FALSE}
+data("penguins", package = "palmerpenguins")
+```
+
+```{r calculate_mean, echo = FALSE}
+mean_flipper <- mean(pull(penguins, flipper_length_mm),na.rm = TRUE)
+```
+
+The dataset `penguins` is a data frame consisting of information regarding species, their residing islands, sex, their bill's length and depth, flipper's length, body-mass index, sex and the year the data was collected. These data are provided by the individual variables ``r (names(penguins)[-length(names(penguins))])`` and ``r (names(penguins)[length(names(penguins))])``respectively. There are `r (nrow(penguins))` rows/observations and `r (ncol(penguins))` columns. The mean flipper length for penguins is `r round(mean_flipper, digits =2)` mm. 
+
+Making a scatterplot of flipper_length_mm (y) vs bill_length_mm (x):
+```{r scatter_plot, warning = FALSE}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+ggsave("scatter_plot_flipper_length_vs_bill_length.pdf", height = 4, width = 6)
+```
+
