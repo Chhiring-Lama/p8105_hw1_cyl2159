@@ -32,3 +32,41 @@ ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)
 ggsave("scatter_plot_flipper_length_vs_bill_length.pdf", height = 4, width = 6)
 ```
 
+## *Problem 2*
+
+Creating a dataframe with 10 observations with a random sample variable from a normal distribution, a logical vector indicating whether elements of the sample are greater than 0, a character vector and a factor vector with 3 levels: 
+```{r create_df}
+example_df <- tibble(
+  sample_var = rnorm(10), 
+  log_var = sample_var > 0, 
+  char_var = c("a", "b", "c", "d", "b", "a", "c", "d", "f", "g"), 
+  factor_var = factor(c("NY", "NJ", "NY", "MA", "MA", "MA", "NY", "NY", "NJ", "NJ"))
+)
+
+```
+
+Trying to calculate and outputting mean for each variable:
+```{r mean_calc}
+mean(pull(example_df, sample_var))
+mean(pull(example_df, log_var))
+mean(pull(example_df, char_var))
+mean(pull(example_df, factor_var))
+```
+
+Here, we are able to calculate mean for `sample_var` and `log_var`, but cannot do so for `char_var` and `factor_var` as they are not numeric or binary variables. 
+
+If we coerce them to be a numeric value as shown below:
+```{r mean_calc_after_coercing, eval = FALSE}
+mean(pull(example_df, as.numeric(sample_var)))
+mean(pull(example_df, as.numeric(log_var)))
+mean(pull(example_df, as.numeric(char_var)))
+mean(pull(example_df, as.numeric(factor_var)))
+```
+
+This will also calculate the mean for `char_var` and `factor_var` as NA. However, because we are forcing variable to be numeric and the inherently character values in these two variables cannot be converted to a numeric type, they will all be considered missing values (NAs). As a result, the mean for these variable with be NA, and we will get a warning message. 
+
+
+
+
+
+
