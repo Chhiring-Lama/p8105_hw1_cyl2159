@@ -2,10 +2,7 @@
 title: "p8105_hw1_cyl2159"
 author: "Chhiring Lama"
 date: "2024-09-17"
-output:
-  html_document:
-    toc: true
-    toc_float: true
+output: github_document
 
 ---
 
@@ -24,7 +21,7 @@ data("penguins", package = "palmerpenguins")
 mean_flipper <- mean(pull(penguins, flipper_length_mm),na.rm = TRUE)
 ```
 
-The dataset `penguins` is a data frame consisting of information regarding species, their residing islands, sex, their bill's length and depth, flipper's length, body-mass index, sex and the year the data was collected. These data are provided by the individual variables ``r (names(penguins)[-length(names(penguins))])`` and ``r (names(penguins)[length(names(penguins))])``respectively. There are `r (nrow(penguins))` rows/observations and `r (ncol(penguins))` columns. The mean flipper length for penguins is `r round(mean_flipper, digits =2)` mm. 
+The dataset `penguins` is a data frame consisting of information regarding species, their residing islands, sex, their bill's length and depth, flipper's length, body-mass index, sex and the year the data was collected. These data are provided by the individual variable columns ``r (names(penguins)[-length(names(penguins))])`` and ``r (names(penguins)[length(names(penguins))])``respectively. Among them, `species`, `island`  and `sex` are factor variables, `flipper_length_mm`, `body_mass_g` and `year` are integers, and `bill_length_mm` and `bill_depth_mm` are numeric variables. There are `r (nrow(penguins))` rows/observations and `r (ncol(penguins))` columns. The mean flipper length for penguins is `r round(mean_flipper, digits =2)` mm. 
 
 Making a scatterplot of flipper_length_mm (y) vs bill_length_mm (x):
 ```{r scatter_plot, warning = FALSE}
